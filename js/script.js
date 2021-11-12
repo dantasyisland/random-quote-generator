@@ -5,6 +5,9 @@ project 1 - A Random Quote Generator
 
 /***
  * `quotes` array
+ * An array of quote objects that will be used as data displayed to the user
+ * Each quote object has a quote and a source
+ * Some quote objects contain year, citations or tags
 ***/
 
 let quotes = [
@@ -42,16 +45,20 @@ let quotes = [
   },
 ]
 
-
 /***
  * `getRandomNumber` function
+ * A function that returns a random number that is used as an index in the `getRandomNumber` function
  ***/
+
 function getRandomNumber() {
   return (Math.floor(Math.random() * quotes.length))
 }
 
 /***
- * `getRandomNumber` function
+ * `getRandomQuote` function
+ * A function that calls the `getRandomNumber` function to use as an index in the quotes array
+ * References the previousQuoteIndex variable in a while loop in order to prevent the same index used twice
+ * Returns a quote object from the quotes array
  ***/
 
 let previousQuoteIndex = 0
@@ -68,21 +75,28 @@ function getRandomQuote() {
 
 };
 
-
 /***
- * `randomRGB` function
+ * `randomBodyColor` function
+ * Generates a randomColor via template literals for random RGB values
+ * Changes the backgroundColor style property of the document's body
  ***/
-function randomRGB() {
-  const randomColorValue = () => Math.floor(Math.random() * 256);
-  const randomColor = `rgb( ${randomColorValue()}, ${randomColorValue()}, ${randomColorValue()})`;
-  return randomColor;
+
+function randomBodyColor() {
+  const body = document.body;
+  const randomRGBValue = () => Math.floor(Math.random() * 256);
+  const randomColor = `rgb( ${randomRGBValue()}, ${randomRGBValue()}, ${randomRGBValue()})`;
+  body.style.backgroundColor = randomColor;
 }
 
 /***
  * `printQuote` function
+ * Calls randomQuote to get a quote object
+ * Quote object then passes through a series of conditional statements to append to quoteHTML
+ * Calls the randomBodyColor() function to change the background color
+ * Returns a template literal called quoteHTML containing a paragraph for both the quote and source and spans for citation, year and tags
  ***/
+
 function printQuote() {
-  const body = document.body;
   let randomQuote = getRandomQuote();
   let quoteHTML = `<p class="quote">${randomQuote.quote}</p><p class="source">${randomQuote.source}`;
 
@@ -104,12 +118,21 @@ function printQuote() {
   quoteHTML +=`</p>`;
   document.getElementById("quote-box").innerHTML = quoteHTML;
 
-  body.style.backgroundColor = randomRGB();
+  randomBodyColor();
+
   return quoteHTML;
 }
+
+/***
+ * `setInterval` function
+ *  Uses printQuote as it's callback function so the page will refresh a quote and new color every ten seconds
+***/
+
+setInterval(printQuote,10000);
 
 /***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
+
 document.getElementById("load-quote").addEventListener("click", printQuote, false);
