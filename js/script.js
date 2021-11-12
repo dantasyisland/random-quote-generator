@@ -39,7 +39,7 @@ let quotes = [
     tags:["music","mental toughness"]
   },
   {
-    quote:"Klaatu...Barada...Nnn **coughs** Okay then...that\'s it",source:"Ashley Joanna \"Ash\" Williams",
+    quote:"Klaatu...Barada...Nnn *coughs* Okay then...that\'s it",source:"Ashley Joanna \"Ash\" Williams",
     year:"1300 A.D.",
     tags:["apocalyptic blunders"]
   },
