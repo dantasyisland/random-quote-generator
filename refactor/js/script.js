@@ -48,6 +48,11 @@ let quotes = [
     year: "1300 A.D.",
     tags: ["apocalyptic blunders"],
   },
+  {
+    quote: "Test quote without a tag",
+    source: "Some coder",
+    year: "2022",
+  },
 ];
 
 /***
@@ -122,7 +127,7 @@ function printQuote() {
   quoteHTML += `</p>`;
   document.getElementById("quote-box").innerHTML = quoteHTML;
 
-  randomBodyColor();
+  // randomBodyColor();
 
   return quoteHTML;
 }
@@ -132,7 +137,7 @@ function printQuote() {
  *  Uses printQuote as it's callback function so the page will refresh a quote and new color every ten seconds
  ***/
 
-setInterval(printQuote, 10000);
+// setInterval(printQuote, 10000);
 
 /***
  * click event listener for the print quote button
@@ -148,16 +153,39 @@ document
 const quoteTags = new Set();
 
 quotes.forEach((quote, index) => {
-  console.log(index, quote.tags);
-  quote.tags.forEach((tag) => {
-    quoteTags.add(tag);
-  });
+  if (quote.tags) {
+    console.log(index, quote.tags);
+    quote.tags.forEach((tag) => {
+      quoteTags.add(tag);
+    });
+  }
 });
 
-console.log(quoteTags);
+const filteredTagArrray = [];
+const selectedTag = "mental toughness";
+quotes.forEach((quote, index) => {
+  if (quote.tags) {
+    quote.tags.forEach((tag, index) => {
+      if (tag == selectedTag) {
+        filteredTagArrray.push(quote);
+      }
+    });
+  }
+});
 
-const container = document.querySelector(".container");
+console.log(`Quote Tags Are: `, quoteTags);
+console.log("Filtered array contains: ", filteredTagArrray);
+
+const container = document.querySelector(".quote-container");
 const tagFilter = document.createElement("p");
 
-tagFilter.innerText = "Filters here";
+quotes.forEach((quote, index) => {});
+
+filteredTagArrray.forEach((quote) => {
+  console.log("hi");
+  const newQuote = document.createElement("span");
+  newQuote.appendChild(document.createTextNode(`"${quote.quote}"`));
+  newQuote.appendChild(document.createElement("br"));
+  container.append(newQuote);
+});
 container.append(tagFilter);
