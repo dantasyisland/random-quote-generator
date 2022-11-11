@@ -107,7 +107,7 @@ function randomBodyColor() {
 
 function printQuote() {
   let randomQuote = getRandomQuote();
-  let quoteHTML = `<p class="quote">${randomQuote.quote}</p><p class="source">${randomQuote.source}`;
+  let quoteHTML = `<blockquote class="blockquote">${randomQuote.quote}</blockquote><p class="source">${randomQuote.source}`;
 
   if (randomQuote.citation) {
     quoteHTML += `<span class="citation">${randomQuote.citation}</span>`;
@@ -125,7 +125,7 @@ function printQuote() {
   }
 
   quoteHTML += `</p>`;
-  document.getElementById("quote-box").innerHTML = quoteHTML;
+  document.querySelector(".blockquote").innerHTML = quoteHTML;
 
   // randomBodyColor();
 
